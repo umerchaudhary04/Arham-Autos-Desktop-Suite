@@ -128,7 +128,7 @@ class _SetupWizardState extends ConsumerState<SetupWizard> {
             return;
           }
 
-          if (_currentStep < 4) {
+          if (_currentStep < 3) {
             setState(() => _currentStep++);
           } else {
             _completeSetup();
@@ -241,29 +241,6 @@ class _SetupWizardState extends ConsumerState<SetupWizard> {
                     setState(() => _backupLocation = path);
                   },
                   child: const Text('Select Backup Folder'),
-                ),
-              ],
-            ),
-          ),
-          Step(
-            title: const Text('Finish'),
-            isActive: _currentStep >= 4,
-            content: Column(
-              children: [
-                const Text('Import legacy data from MS Access?'),
-                RadioListTile<bool>(
-                  title: const Text('No, start fresh'),
-                  value: false,
-                  groupValue: _importNow,
-                  onChanged: (v) => setState(() => _importNow = v!),
-                ),
-                RadioListTile<bool>(
-                  title: const Text(
-                    'Yes, run Import Wizard (Coming in Phase 5)',
-                  ),
-                  value: true,
-                  groupValue: _importNow,
-                  onChanged: null, // Disabled per requirements
                 ),
               ],
             ),

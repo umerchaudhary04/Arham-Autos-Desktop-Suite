@@ -8,7 +8,7 @@ import '../parts/parts_catalog_screen.dart';
 import '../ledger/khata_ledger_screen.dart';
 import '../purchases/grn_screen.dart';
 import '../reports/reports_screen.dart';
-import '../import/import_wizard_screen.dart';
+import '../areas/area_screen.dart';
 import '../returns/returns_claims_screen.dart';
 import '../admin/backup_restore_screen.dart';
 import '../gl/gl_screen.dart';
@@ -122,9 +122,9 @@ class _SidebarShellState extends ConsumerState<SidebarShell> {
         ),
       if (isAdmin)
         _NavItem(
-          icon: Icons.import_export,
-          label: 'Legacy Import Wizard',
-          screen: const ImportWizardScreen(),
+          icon: Icons.map,
+          label: 'Areas',
+          screen: const AreaScreen(),
         ),
       if (isAdmin)
         _NavItem(

@@ -229,7 +229,25 @@ class AppDatabase extends _$AppDatabase {
     : super(executor ?? _openConnection(encryptionKey));
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration {
+    return MigrationStrategy(
+      onCreate: (Migrator m) async {
+        await m.createAll();
+      },
+      onUpgrade: (Migrator m, int from, int to) async {
+        if (from < 2) {
+          await m.createTable(areas);
+          await m.createTable(employees);
+          await m.createTable(chartOfAccounts);
+          await m.createTable(glTransactions);
+          await m.addColumn(accountsLedger, accountsLedger.areaId);
+        }
+      },
+    );
+  }
 }
 
 LazyDatabase _openConnection(String encryptionKey) {
