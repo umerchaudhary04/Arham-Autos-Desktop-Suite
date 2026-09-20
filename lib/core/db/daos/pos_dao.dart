@@ -18,6 +18,7 @@ class PosDao extends DatabaseAccessor<AppDatabase> with _$PosDaoMixin {
     required double discount,
     required double totalAmount,
     required double finalAmount,
+    bool bypassCreditLimit = false,
   }) async {
     return transaction(() async {
       final invoiceId = const Uuid().v4();
@@ -96,6 +97,10 @@ class PosDao extends DatabaseAccessor<AppDatabase> with _$PosDaoMixin {
           accountsLedger,
         )..where((a) => a.accountId.equals(customerId))).getSingle();
         final newBalance = account.currentBalance + finalAmount;
+
+        if (account.creditLimit != null && newBalance > account.creditLimit! && !bypassCreditLimit) {
+          throw Exception('Credit limit exceeded for customer ${account.accountName}. Limit: ${account.creditLimit}, New Balance: $newBalance');
+        }
 
         // Ensure credit limit is respected (UI can bypass via Pin Modal, but DB validates if limit exists and is strictly enforced unless passed down)
         // Here we just update, bypass logic handles pin beforehand.
