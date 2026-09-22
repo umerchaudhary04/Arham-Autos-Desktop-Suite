@@ -71,7 +71,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             children: [
               const Icon(Icons.lock, size: 64, color: Colors.teal),
               const SizedBox(height: 32),
-
               if (_usePin) ...[
                 Text(
                   'Enter PIN',
@@ -92,23 +91,32 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   children: [
                     for (int i = 1; i <= 9; i++)
                       ElevatedButton(
-                        onPressed: () => _onPinPadPressed(i.toString()),
+                        onPressed: _pin.length < 6
+                            ? () => _onPinPadPressed(i.toString())
+                            : null,
                         child: Text(
                           i.toString(),
                           style: const TextStyle(fontSize: 24),
                         ),
                       ),
                     ElevatedButton(
-                      onPressed: _onPinDelete,
-                      child: const Icon(Icons.backspace),
+                      onPressed: _pin.isNotEmpty ? _onPinDelete : null,
+                      child: const Tooltip(
+                        message: 'Delete last digit',
+                        child: Icon(Icons.backspace),
+                      ),
                     ),
                     ElevatedButton(
-                      onPressed: () => _onPinPadPressed('0'),
+                      onPressed:
+                          _pin.length < 6 ? () => _onPinPadPressed('0') : null,
                       child: const Text('0', style: TextStyle(fontSize: 24)),
                     ),
                     ElevatedButton(
-                      onPressed: _submitPin,
-                      child: const Icon(Icons.check),
+                      onPressed: _pin.isNotEmpty ? _submitPin : null,
+                      child: const Tooltip(
+                        message: 'Submit PIN',
+                        child: Icon(Icons.check),
+                      ),
                     ),
                   ],
                 ),
@@ -134,7 +142,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   child: const Text('Login'),
                 ),
               ],
-
               const SizedBox(height: 32),
               TextButton(
                 onPressed: () => setState(() => _usePin = !_usePin),
