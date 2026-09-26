@@ -31,20 +31,6 @@ class AuditLog extends Table {
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 }
 
-class MigrationLog extends Table {
-  TextColumn get migrationId => text()();
-  TextColumn get sourceFile => text()();
-  IntColumn get recordsImported => integer().nullable()();
-  IntColumn get recordsFlagged => integer().nullable()();
-  TextColumn get performedBy =>
-      text().nullable()(); // TODO: References local_users(id)
-  DateTimeColumn get performedAt =>
-      dateTime().withDefault(currentDateAndTime)();
-
-  @override
-  Set<Column> get primaryKey => {migrationId};
-}
-
 class ParkedCarts extends Table {
   TextColumn get parkedId => text()();
   TextColumn get userId => text()(); // TODO: References local_users(id)
@@ -207,7 +193,6 @@ class InvoiceItems extends Table {
   tables: [
     BackupLog,
     AuditLog,
-    MigrationLog,
     ParkedCarts,
     ReturnsClaims,
     LocalUsers,

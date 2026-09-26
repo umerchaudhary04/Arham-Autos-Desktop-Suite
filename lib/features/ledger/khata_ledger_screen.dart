@@ -89,7 +89,7 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
                       accountId: const Uuid().v4(),
                       accountName: nameCtrl.text,
                       accountType: selectedType,
-                      currentBalance: 0.0,
+                      currentBalance: const drift.Value(0.0),
                       creditLimit: drift.Value(limit),
                       areaId: drift.Value(selectedAreaId),
                     ));
@@ -155,7 +155,7 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
                       icon: const Icon(Icons.add),
                       label: Text('Add $selectedType'),
                       onPressed: () {
-                        final areas = areasAsync.valueOrNull;
+                        final areas = areasAsync.value;
                         _showAddAccountDialog(selectedType, areas);
                       },
                     ),
