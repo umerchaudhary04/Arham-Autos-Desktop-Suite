@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import '../../core/security/auth_provider.dart';
 import '../../core/db/database.dart';
 import '../reports/dashboard_screen.dart';
@@ -67,69 +68,69 @@ class _SidebarShellState extends ConsumerState<SidebarShell> {
     final navItems = <_NavItem>[
       _NavItem(
         icon: Icons.dashboard,
-        label: 'Dashboard',
+        label: AppLocalizations.of(context)!.navDashboard,
         screen: const DashboardScreen(),
       ),
       _NavItem(
         icon: Icons.point_of_sale,
-        label: 'POS Billing',
+        label: AppLocalizations.of(context)!.navPosBilling,
         screen: const PosBillingScreen(),
       ),
       _NavItem(
         icon: Icons.inventory_2,
-        label: 'Parts Catalog',
+        label: AppLocalizations.of(context)!.navPartsCatalog,
         screen: const PartsCatalogScreen(),
       ),
       _NavItem(
         icon: Icons.book,
-        label: 'Khata Ledger',
+        label: AppLocalizations.of(context)!.navKhataLedger,
         screen: const KhataLedgerScreen(),
       ),
       if (isManager)
         _NavItem(
           icon: Icons.local_shipping,
-          label: 'Purchases / GRN',
+          label: AppLocalizations.of(context)!.navGrn,
           screen: const GrnScreen(),
         ),
       _NavItem(
         icon: Icons.assignment_return,
-        label: 'Returns & Claims',
+        label: AppLocalizations.of(context)!.navReturns,
         screen: const ReturnsClaimsScreen(),
       ),
       if (isManager)
         _NavItem(
-          icon: Icons.analytics,
-          label: 'Reports',
-          screen: const ReportsScreen(),
-        ),
-      if (isManager)
-        _NavItem(
           icon: Icons.account_balance,
-          label: 'Accounts & Expenses',
+          label: AppLocalizations.of(context)!.navAccounts,
           screen: const GlScreen(),
         ),
       if (isManager)
         _NavItem(
           icon: Icons.people,
-          label: 'Employees',
+          label: AppLocalizations.of(context)!.navEmployees,
           screen: const HrScreen(),
         ),
       if (isAdmin)
         _NavItem(
+          icon: Icons.map,
+          label: AppLocalizations.of(context)!.navAreas,
+          screen: const AreaScreen(),
+        ),
+      if (isManager)
+        _NavItem(
+          icon: Icons.analytics,
+          label: AppLocalizations.of(context)!.navReports,
+          screen: const ReportsScreen(),
+        ),
+      if (isAdmin)
+        _NavItem(
           icon: Icons.backup,
-          label: 'Backup & Restore',
+          label: AppLocalizations.of(context)!.navBackup,
           screen: const BackupRestoreScreen(),
         ),
       if (isAdmin)
         _NavItem(
-          icon: Icons.map,
-          label: 'Areas',
-          screen: const AreaScreen(),
-        ),
-      if (isAdmin)
-        _NavItem(
           icon: Icons.settings,
-          label: 'Settings',
+          label: AppLocalizations.of(context)!.navSettings,
           screen: const SettingsScreen(),
         ),
     ];

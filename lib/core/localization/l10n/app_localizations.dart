@@ -103,6 +103,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Arham Autos Desktop Suite'**
   String get appTitle;
+
+  /// No description provided for @navDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Dashboard'**
+  String get navDashboard;
+
+  /// No description provided for @navPosBilling.
+  ///
+  /// In en, this message translates to:
+  /// **'POS Billing'**
+  String get navPosBilling;
+
+  /// No description provided for @navPartsCatalog.
+  ///
+  /// In en, this message translates to:
+  /// **'Parts Catalog'**
+  String get navPartsCatalog;
+
+  /// No description provided for @navKhataLedger.
+  ///
+  /// In en, this message translates to:
+  /// **'Khata Ledger'**
+  String get navKhataLedger;
+
+  /// No description provided for @navGrn.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases / GRN'**
+  String get navGrn;
+
+  /// No description provided for @navReturns.
+  ///
+  /// In en, this message translates to:
+  /// **'Returns & Claims'**
+  String get navReturns;
+
+  /// No description provided for @navAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts & Expenses'**
+  String get navAccounts;
+
+  /// No description provided for @navEmployees.
+  ///
+  /// In en, this message translates to:
+  /// **'Employees'**
+  String get navEmployees;
+
+  /// No description provided for @navAreas.
+  ///
+  /// In en, this message translates to:
+  /// **'Areas'**
+  String get navAreas;
+
+  /// No description provided for @navReports.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get navReports;
+
+  /// No description provided for @navBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup & Restore'**
+  String get navBackup;
+
+  /// No description provided for @navSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get navSettings;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin Settings'**
+  String get settingsTitle;
+
+  /// No description provided for @languageToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageToggle;
+
+  /// No description provided for @securityConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'Security Configuration'**
+  String get securityConfig;
+
+  /// No description provided for @idleTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Idle Auto-Lock Timeout (minutes):'**
+  String get idleTimeout;
+
+  /// No description provided for @userManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'User Management'**
+  String get userManagement;
+
+  /// No description provided for @addUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Add User'**
+  String get addUser;
+
+  /// No description provided for @editUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit User'**
+  String get editUser;
+
+  /// No description provided for @deleteUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete User'**
+  String get deleteUser;
+
+  /// No description provided for @deleteUserConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this user?'**
+  String get deleteUserConfirm;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @username.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get username;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullName;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @pin.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN (4 digits)'**
+  String get pin;
+
+  /// No description provided for @role.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get role;
+
+  /// No description provided for @viewAuditLog.
+  ///
+  /// In en, this message translates to:
+  /// **'View System Audit Log'**
+  String get viewAuditLog;
 }
 
 class _AppLocalizationsDelegate
