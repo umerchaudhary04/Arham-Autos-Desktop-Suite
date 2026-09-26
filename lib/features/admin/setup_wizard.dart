@@ -34,9 +34,6 @@ class _SetupWizardState extends ConsumerState<SetupWizard> {
   // Step 4: Backup Location
   String? _backupLocation;
 
-  // Step 5: Import
-  bool _importNow = false;
-
   @override
   void initState() {
     super.initState();
