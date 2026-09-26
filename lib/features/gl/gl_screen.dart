@@ -49,15 +49,25 @@ class _GlScreenState extends ConsumerState<GlScreen> {
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
           ElevatedButton(
             onPressed: () async {
-              if (nameCtrl.text.isEmpty) return;
+              if (nameCtrl.text.isEmpty) {
+                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Account Name is required')));
+                return;
+              }
               final db = ref.read(databaseProvider)!;
-              await db.into(db.chartOfAccounts).insert(ChartOfAccountsCompanion.insert(
-                accountId: const Uuid().v4(),
-                accountName: nameCtrl.text,
-                accountType: type,
-              ));
-              ref.invalidate(coaProvider);
-              Navigator.pop(ctx);
+              try {
+                await db.into(db.chartOfAccounts).insert(ChartOfAccountsCompanion.insert(
+                  accountId: const Uuid().v4(),
+                  accountName: nameCtrl.text,
+                  accountType: type,
+                ));
+                ref.invalidate(coaProvider);
+                if (ctx.mounted) Navigator.pop(ctx);
+              } catch (e) {
+                debugPrint('Error inserting account: $e');
+                if (ctx.mounted) {
+                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('Failed to save account: $e')));
+                }
+              }
             },
             child: const Text('Save'),
           ),
@@ -110,22 +120,40 @@ class _GlScreenState extends ConsumerState<GlScreen> {
           ElevatedButton(
             onPressed: () async {
               final amt = double.tryParse(amountCtrl.text);
-              if (amt == null) return;
-              await db.into(db.glTransactions).insert(GlTransactionsCompanion.insert(
-                transactionId: const Uuid().v4(),
-                accountId: accountId,
-                amount: amt,
-                transactionType: 'Journal',
-                description: drift.Value(descCtrl.text),
-                recordedBy: 'system', // Would use actual user id here
-              ));
-              // Also update balance
-              final acc = accounts.firstWhere((a) => a.accountId == accountId);
-              await (db.update(db.chartOfAccounts)..where((a) => a.accountId.equals(accountId))).write(
-                ChartOfAccountsCompanion(currentBalance: drift.Value(acc.currentBalance + amt)),
-              );
-              ref.invalidate(coaProvider);
-              Navigator.pop(ctx);
+              if (amt == null) {
+                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Please enter a valid amount')));
+                return;
+              }
+              
+              final user = ref.read(authProvider).user;
+              final recordedBy = user?.id ?? 'system';
+              
+              try {
+                await db.transaction(() async {
+                  await db.into(db.glTransactions).insert(GlTransactionsCompanion.insert(
+                    transactionId: const Uuid().v4(),
+                    accountId: accountId,
+                    amount: amt,
+                    transactionType: 'Journal',
+                    description: drift.Value(descCtrl.text),
+                    recordedBy: recordedBy,
+                  ));
+                  
+                  // Also update balance
+                  final acc = accounts.firstWhere((a) => a.accountId == accountId);
+                  await (db.update(db.chartOfAccounts)..where((a) => a.accountId.equals(accountId))).write(
+                    ChartOfAccountsCompanion(currentBalance: drift.Value(acc.currentBalance + amt)),
+                  );
+                });
+                
+                ref.invalidate(coaProvider);
+                if (ctx.mounted) Navigator.pop(ctx);
+              } catch (e) {
+                debugPrint('Error recording transaction: $e');
+                if (ctx.mounted) {
+                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('Failed to save transaction: $e')));
+                }
+              }
             },
             child: const Text('Save'),
           ),

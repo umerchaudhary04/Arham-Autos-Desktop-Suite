@@ -50,16 +50,32 @@ class _HrScreenState extends ConsumerState<HrScreen> {
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
           ElevatedButton(
             onPressed: () async {
-              if (nameCtrl.text.isEmpty) return;
+              if (nameCtrl.text.isEmpty) {
+                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Name is required')));
+                return;
+              }
+              final salary = double.tryParse(salaryCtrl.text);
+              if (salaryCtrl.text.isNotEmpty && salary == null) {
+                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Invalid salary format')));
+                return;
+              }
+
               final db = ref.read(databaseProvider)!;
-              await db.into(db.employees).insert(EmployeesCompanion.insert(
-                employeeId: const Uuid().v4(),
-                fullName: nameCtrl.text,
-                jobTitle: drift.Value(titleCtrl.text),
-                currentSalary: drift.Value(double.tryParse(salaryCtrl.text) ?? 0.0),
-              ));
-              ref.invalidate(employeesProvider);
-              Navigator.pop(ctx);
+              try {
+                await db.into(db.employees).insert(EmployeesCompanion.insert(
+                  employeeId: const Uuid().v4(),
+                  fullName: nameCtrl.text,
+                  jobTitle: drift.Value(titleCtrl.text),
+                  currentSalary: drift.Value(salary ?? 0.0),
+                ));
+                ref.invalidate(employeesProvider);
+                if (ctx.mounted) Navigator.pop(ctx);
+              } catch (e) {
+                debugPrint('Error inserting employee: $e');
+                if (ctx.mounted) {
+                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('Failed to save employee: $e')));
+                }
+              }
             },
             child: const Text('Save'),
           ),

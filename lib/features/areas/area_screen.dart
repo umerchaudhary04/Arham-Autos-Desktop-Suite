@@ -39,16 +39,26 @@ class _AreaScreenState extends ConsumerState<AreaScreen> {
             TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
             ElevatedButton(
               onPressed: () async {
-                if (nameCtrl.text.isEmpty) return;
+                if (nameCtrl.text.isEmpty) {
+                  ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Area Name is required')));
+                  return;
+                }
                 
                 final db = ref.read(databaseProvider)!;
-                await db.into(db.areas).insert(AreasCompanion.insert(
-                  areaId: const Uuid().v4(),
-                  areaName: nameCtrl.text,
-                  city: drift.Value(cityCtrl.text),
-                ));
-                ref.invalidate(areasListProvider);
-                Navigator.pop(ctx);
+                try {
+                  await db.into(db.areas).insert(AreasCompanion.insert(
+                    areaId: const Uuid().v4(),
+                    areaName: nameCtrl.text,
+                    city: drift.Value(cityCtrl.text),
+                  ));
+                  ref.invalidate(areasListProvider);
+                  if (ctx.mounted) Navigator.pop(ctx);
+                } catch (e) {
+                  debugPrint('Error inserting area: $e');
+                  if (ctx.mounted) {
+                    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('Failed to save area: $e')));
+                  }
+                }
               },
               child: const Text('Save Area'),
             ),
