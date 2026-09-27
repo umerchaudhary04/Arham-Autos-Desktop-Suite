@@ -98,7 +98,7 @@ abstract class AppLocalizations {
     Locale('ur'),
   ];
 
-  /// The title of the application
+  /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
   /// **'Arham Autos Desktop Suite'**
@@ -283,6 +283,486 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View System Audit Log'**
   String get viewAuditLog;
+
+  /// No description provided for @addNewPart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Part'**
+  String get addNewPart;
+
+  /// No description provided for @partName.
+  ///
+  /// In en, this message translates to:
+  /// **'Part Name *'**
+  String get partName;
+
+  /// No description provided for @oemNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'OEM Number'**
+  String get oemNumber;
+
+  /// No description provided for @model.
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get model;
+
+  /// No description provided for @rackLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Rack Location'**
+  String get rackLocation;
+
+  /// No description provided for @minReorderLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Min Reorder Level'**
+  String get minReorderLevel;
+
+  /// No description provided for @savePart.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Part'**
+  String get savePart;
+
+  /// No description provided for @partsCatalogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Parts Catalog & Inventory'**
+  String get partsCatalogTitle;
+
+  /// No description provided for @searchParts.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by Part Name, OEM #, Model, or Rack'**
+  String get searchParts;
+
+  /// No description provided for @noPartsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No parts found.'**
+  String get noPartsFound;
+
+  /// No description provided for @adjustStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust Stock'**
+  String get adjustStock;
+
+  /// No description provided for @authorizedMock.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorized. (Structural Mock)'**
+  String get authorizedMock;
+
+  /// No description provided for @khataLedger.
+  ///
+  /// In en, this message translates to:
+  /// **'Khata Ledger'**
+  String get khataLedger;
+
+  /// No description provided for @customers.
+  ///
+  /// In en, this message translates to:
+  /// **'Customers'**
+  String get customers;
+
+  /// No description provided for @suppliers.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppliers'**
+  String get suppliers;
+
+  /// No description provided for @addCustomer.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Customer'**
+  String get addCustomer;
+
+  /// No description provided for @addSupplier.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Supplier'**
+  String get addSupplier;
+
+  /// No description provided for @accountName.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Name'**
+  String get accountName;
+
+  /// No description provided for @creditLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit Limit'**
+  String get creditLimit;
+
+  /// No description provided for @selectArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Area (Optional)'**
+  String get selectArea;
+
+  /// No description provided for @viewLedger.
+  ///
+  /// In en, this message translates to:
+  /// **'View Ledger'**
+  String get viewLedger;
+
+  /// No description provided for @noAccountsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No accounts found.'**
+  String get noAccountsFound;
+
+  /// No description provided for @balance.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get balance;
+
+  /// No description provided for @limit.
+  ///
+  /// In en, this message translates to:
+  /// **'Limit'**
+  String get limit;
+
+  /// No description provided for @recordGrn.
+  ///
+  /// In en, this message translates to:
+  /// **'Record Goods Receipt Note (GRN)'**
+  String get recordGrn;
+
+  /// No description provided for @selectSupplier.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Supplier'**
+  String get selectSupplier;
+
+  /// No description provided for @selectPart.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Part'**
+  String get selectPart;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantity;
+
+  /// No description provided for @unitPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit Price'**
+  String get unitPrice;
+
+  /// No description provided for @addItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Item'**
+  String get addItem;
+
+  /// No description provided for @noItemsGrn.
+  ///
+  /// In en, this message translates to:
+  /// **'No items added.'**
+  String get noItemsGrn;
+
+  /// No description provided for @saveGrn.
+  ///
+  /// In en, this message translates to:
+  /// **'Save GRN'**
+  String get saveGrn;
+
+  /// No description provided for @itemPart.
+  ///
+  /// In en, this message translates to:
+  /// **'Item/Part'**
+  String get itemPart;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get price;
+
+  /// No description provided for @posBilling.
+  ///
+  /// In en, this message translates to:
+  /// **'POS Billing'**
+  String get posBilling;
+
+  /// No description provided for @searchPartToAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Search part to add...'**
+  String get searchPartToAdd;
+
+  /// No description provided for @quantityPos.
+  ///
+  /// In en, this message translates to:
+  /// **'Qty'**
+  String get quantityPos;
+
+  /// No description provided for @pricePos.
+  ///
+  /// In en, this message translates to:
+  /// **'Price (Rs)'**
+  String get pricePos;
+
+  /// No description provided for @parkSale.
+  ///
+  /// In en, this message translates to:
+  /// **'Park Sale'**
+  String get parkSale;
+
+  /// No description provided for @recallSale.
+  ///
+  /// In en, this message translates to:
+  /// **'Recall Sale'**
+  String get recallSale;
+
+  /// No description provided for @checkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get checkout;
+
+  /// No description provided for @noItemsPos.
+  ///
+  /// In en, this message translates to:
+  /// **'No items in cart.'**
+  String get noItemsPos;
+
+  /// No description provided for @returnsClaims.
+  ///
+  /// In en, this message translates to:
+  /// **'Returns & Claims'**
+  String get returnsClaims;
+
+  /// No description provided for @selectInvoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Original Invoice'**
+  String get selectInvoice;
+
+  /// No description provided for @selectMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Refund Method'**
+  String get selectMethod;
+
+  /// No description provided for @cash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get cash;
+
+  /// No description provided for @khataCredit.
+  ///
+  /// In en, this message translates to:
+  /// **'Khata Credit'**
+  String get khataCredit;
+
+  /// No description provided for @approveReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve & Process Return'**
+  String get approveReturn;
+
+  /// No description provided for @processReturnMock.
+  ///
+  /// In en, this message translates to:
+  /// **'Return Processed (Mock)'**
+  String get processReturnMock;
+
+  /// No description provided for @accountsExpenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts & Expenses'**
+  String get accountsExpenses;
+
+  /// No description provided for @addAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Account'**
+  String get addAccount;
+
+  /// No description provided for @recordTransaction.
+  ///
+  /// In en, this message translates to:
+  /// **'Record Transaction'**
+  String get recordTransaction;
+
+  /// No description provided for @type.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get type;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @amount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get amount;
+
+  /// No description provided for @noAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'No accounts found.'**
+  String get noAccounts;
+
+  /// No description provided for @employeeManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Employee Management'**
+  String get employeeManagement;
+
+  /// No description provided for @addEmployee.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Employee'**
+  String get addEmployee;
+
+  /// No description provided for @jobTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Job Title'**
+  String get jobTitle;
+
+  /// No description provided for @currentSalary.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Salary'**
+  String get currentSalary;
+
+  /// No description provided for @saveEmployee.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Employee'**
+  String get saveEmployee;
+
+  /// No description provided for @noEmployees.
+  ///
+  /// In en, this message translates to:
+  /// **'No employees found.'**
+  String get noEmployees;
+
+  /// No description provided for @areaManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Area Management'**
+  String get areaManagement;
+
+  /// No description provided for @addArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Area'**
+  String get addArea;
+
+  /// No description provided for @areaName.
+  ///
+  /// In en, this message translates to:
+  /// **'Area Name'**
+  String get areaName;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
+  /// No description provided for @saveArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Area'**
+  String get saveArea;
+
+  /// No description provided for @noAreas.
+  ///
+  /// In en, this message translates to:
+  /// **'No areas found.'**
+  String get noAreas;
+
+  /// No description provided for @reportsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports & Analytics'**
+  String get reportsTitle;
+
+  /// No description provided for @dailySales.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Sales Report'**
+  String get dailySales;
+
+  /// No description provided for @inventoryValuation.
+  ///
+  /// In en, this message translates to:
+  /// **'Inventory Valuation'**
+  String get inventoryValuation;
+
+  /// No description provided for @customerBalances.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer Balances'**
+  String get customerBalances;
+
+  /// No description provided for @exportData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Data to CSV'**
+  String get exportData;
+
+  /// No description provided for @backupRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup & Restore'**
+  String get backupRestore;
+
+  /// No description provided for @createBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Backup'**
+  String get createBackup;
+
+  /// No description provided for @restoreBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore Backup'**
+  String get restoreBackup;
+
+  /// No description provided for @selectFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Backup File'**
+  String get selectFile;
+
+  /// No description provided for @restore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get restore;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
 }
 
 class _AppLocalizationsDelegate

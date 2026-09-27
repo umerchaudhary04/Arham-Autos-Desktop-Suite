@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'core/localization/l10n/app_localizations.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -69,6 +70,9 @@ class MyApp extends ConsumerWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
           useMaterial3: true,
+          textTheme: locale.languageCode == 'ur' 
+            ? GoogleFonts.notoNastaliqUrduTextTheme() 
+            : null,
         ),
         home: const AuthRouter(),
       ),

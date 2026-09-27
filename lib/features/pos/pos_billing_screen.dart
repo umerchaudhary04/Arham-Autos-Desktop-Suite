@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'pos_provider.dart';

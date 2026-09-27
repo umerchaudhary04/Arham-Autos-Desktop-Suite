@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/db/database.dart';
 import '../../core/security/auth_provider.dart';
@@ -100,7 +101,7 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen> {
     final isAdmin = user?.role == 'Admin';
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Reports & Analytics')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.reportsTitle)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

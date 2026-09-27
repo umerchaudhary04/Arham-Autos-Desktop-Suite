@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:file_picker/file_picker.dart';
 import 'backup_service.dart';
@@ -136,7 +137,7 @@ class _BackupRestoreScreenState extends ConsumerState<BackupRestoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Backup & Restore')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.backupRestore)),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(

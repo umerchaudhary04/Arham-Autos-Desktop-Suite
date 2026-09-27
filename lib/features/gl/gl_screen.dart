@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/db/database.dart';
 import '../../core/security/auth_provider.dart';
@@ -26,13 +27,13 @@ class _GlScreenState extends ConsumerState<GlScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Add Account'),
+        title: Text(AppLocalizations.of(context)!.addAccount),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: nameCtrl,
-              decoration: const InputDecoration(labelText: 'Account Name'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context)!.accountName),
             ),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
@@ -41,16 +42,16 @@ class _GlScreenState extends ConsumerState<GlScreen> {
                   .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                   .toList(),
               onChanged: (v) => type = v!,
-              decoration: const InputDecoration(labelText: 'Type'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context)!.type),
             ),
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context)!.cancel)),
           ElevatedButton(
             onPressed: () async {
               if (nameCtrl.text.isEmpty) {
-                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Account Name is required')));
+                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                 return;
               }
               final db = ref.read(databaseProvider)!;
@@ -65,11 +66,11 @@ class _GlScreenState extends ConsumerState<GlScreen> {
               } catch (e) {
                 debugPrint('Error inserting account: $e');
                 if (ctx.mounted) {
-                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('Failed to save account: $e')));
+                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('${AppLocalizations.of(context)!.error}: $e')));
                 }
               }
             },
-            child: const Text('Save'),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),
@@ -92,7 +93,7 @@ class _GlScreenState extends ConsumerState<GlScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Record Transaction'),
+        title: Text(AppLocalizations.of(context)!.recordTransaction),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -102,26 +103,26 @@ class _GlScreenState extends ConsumerState<GlScreen> {
                   .map((e) => DropdownMenuItem(value: e.accountId, child: Text('${e.accountName} (${e.accountType})')))
                   .toList(),
               onChanged: (v) => accountId = v!,
-              decoration: const InputDecoration(labelText: 'Account'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context)!.itemPart),
             ),
             TextField(
               controller: amountCtrl,
-              decoration: const InputDecoration(labelText: 'Amount'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context)!.amount),
               keyboardType: TextInputType.number,
             ),
             TextField(
               controller: descCtrl,
-              decoration: const InputDecoration(labelText: 'Description'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context)!.description),
             ),
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context)!.cancel)),
           ElevatedButton(
             onPressed: () async {
               final amt = double.tryParse(amountCtrl.text);
               if (amt == null) {
-                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Please enter a valid amount')));
+                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                 return;
               }
               
@@ -151,11 +152,11 @@ class _GlScreenState extends ConsumerState<GlScreen> {
               } catch (e) {
                 debugPrint('Error recording transaction: $e');
                 if (ctx.mounted) {
-                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('Failed to save transaction: $e')));
+                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('${AppLocalizations.of(context)!.error}: $e')));
                 }
               }
             },
-            child: const Text('Save'),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),
@@ -174,18 +175,18 @@ class _GlScreenState extends ConsumerState<GlScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Accounts & Expenses', style: Theme.of(context).textTheme.headlineMedium),
+              Text(AppLocalizations.of(context)!.accountsExpenses, style: Theme.of(context).textTheme.headlineMedium),
               Row(
                 children: [
                   ElevatedButton.icon(
                     icon: const Icon(Icons.add),
-                    label: const Text('Add Account'),
+                    label: Text(AppLocalizations.of(context)!.addAccount),
                     onPressed: _showAddAccountDialog,
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton.icon(
                     icon: const Icon(Icons.receipt),
-                    label: const Text('Record Transaction'),
+                    label: Text(AppLocalizations.of(context)!.recordTransaction),
                     onPressed: _showRecordTransactionDialog,
                   ),
                 ],
@@ -198,7 +199,7 @@ class _GlScreenState extends ConsumerState<GlScreen> {
               data: (accounts) {
                 if (accounts.isEmpty) return const Center(child: Text('No accounts found.'));
                 return DataTable(
-                  columns: const [
+                  columns: [
                     DataColumn(label: Text('Account Name')),
                     DataColumn(label: Text('Type')),
                     DataColumn(label: Text('Balance')),
@@ -211,7 +212,7 @@ class _GlScreenState extends ConsumerState<GlScreen> {
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (e, st) => Center(child: Text('Error: $e')),
+              error: (e, st) => Center(child: Text('${AppLocalizations.of(context)!.error}: $e')),
             ),
           ),
         ],

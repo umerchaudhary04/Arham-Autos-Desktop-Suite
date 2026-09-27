@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:drift/drift.dart' as drift;
@@ -58,31 +59,31 @@ class _PartsCatalogScreenState extends ConsumerState<PartsCatalogScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Add New Part'),
+        title: Text(AppLocalizations.of(context)!.addNewPart),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: nameCtrl,
-                decoration: const InputDecoration(labelText: 'Part Name *'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context)!.partName),
               ),
               TextField(
                 controller: oemCtrl,
-                decoration: const InputDecoration(labelText: 'OEM Number'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context)!.oemNumber),
               ),
               TextField(
                 controller: modelCtrl,
-                decoration: const InputDecoration(labelText: 'Model'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context)!.model),
               ),
               TextField(
                 controller: rackCtrl,
-                decoration: const InputDecoration(labelText: 'Rack Location'),
+                decoration: InputDecoration(labelText: AppLocalizations.of(context)!.rackLocation),
               ),
               TextField(
                 controller: reorderCtrl,
                 decoration: const InputDecoration(
-                  labelText: 'Min Reorder Level',
+                  labelText: AppLocalizations.of(context)!.minReorderLevel,
                 ),
                 keyboardType: TextInputType.number,
               ),
@@ -92,7 +93,7 @@ class _PartsCatalogScreenState extends ConsumerState<PartsCatalogScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -121,7 +122,7 @@ class _PartsCatalogScreenState extends ConsumerState<PartsCatalogScreen> {
               ref.invalidate(partsListProvider);
               Navigator.pop(ctx);
             },
-            child: const Text('Save Part'),
+            child: Text(AppLocalizations.of(context)!.savePart),
           ),
         ],
       ),
@@ -149,7 +150,7 @@ class _PartsCatalogScreenState extends ConsumerState<PartsCatalogScreen> {
               if (isManager)
                 ElevatedButton.icon(
                   icon: const Icon(Icons.add),
-                  label: const Text('Add New Part'),
+                  label: Text(AppLocalizations.of(context)!.addNewPart),
                   onPressed: _showAddPartDialog,
                 ),
             ],
@@ -157,7 +158,7 @@ class _PartsCatalogScreenState extends ConsumerState<PartsCatalogScreen> {
           const SizedBox(height: 16),
           TextField(
             decoration: const InputDecoration(
-              labelText: 'Search by Part Name, OEM #, Model, or Rack',
+              labelText: AppLocalizations.of(context)!.searchParts,
               border: OutlineInputBorder(),
               prefixIcon: Icon(Icons.search),
             ),
@@ -196,7 +197,7 @@ class _PartsCatalogScreenState extends ConsumerState<PartsCatalogScreen> {
                                     ),
                                   );
                               },
-                              child: const Text('Adjust Stock'),
+                              child: Text(AppLocalizations.of(context)!.adjustStock),
                             )
                           : null,
                     );
@@ -204,7 +205,7 @@ class _PartsCatalogScreenState extends ConsumerState<PartsCatalogScreen> {
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (e, st) => Center(child: Text('Error: $e')),
+              error: (e, st) => Center(child: Text('${AppLocalizations.of(context)!.error}: $e')),
             ),
           ),
         ],

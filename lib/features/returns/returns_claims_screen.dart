@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/db/database.dart';
 import '../../core/security/auth_provider.dart';
@@ -31,7 +32,7 @@ class _ReturnsClaimsScreenState extends ConsumerState<ReturnsClaimsScreen> {
       length: isManager ? 3 : 1,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Returns & Claims'),
+          title: Text(AppLocalizations.of(context)!.returnsClaims),
           bottom: TabBar(
             tabs: [
               const Tab(text: 'Customer Return'),
@@ -245,11 +246,11 @@ class PendingApprovalsTab extends ConsumerWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 ListTile(
-                                  title: const Text('Cash'),
+                                  title: Text(AppLocalizations.of(context)!.cash),
                                   onTap: () => Navigator.pop(context, 'Cash'),
                                 ),
                                 ListTile(
-                                  title: const Text('Khata Credit'),
+                                  title: Text(AppLocalizations.of(context)!.khataCredit),
                                   onTap: () =>
                                       Navigator.pop(context, 'Khata Credit'),
                                 ),

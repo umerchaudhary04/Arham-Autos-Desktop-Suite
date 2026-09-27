@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/security/auth_provider.dart';
 import '../../core/db/database.dart';
@@ -43,23 +44,23 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
       builder: (ctx) => StatefulBuilder(
         builder: (context, setState) {
           return AlertDialog(
-            title: Text('Add $selectedType'),
+            title: Text(selectedType == 'Customer' ? AppLocalizations.of(context)!.addCustomer : AppLocalizations.of(context)!.addSupplier),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: nameCtrl,
-                  decoration: const InputDecoration(labelText: 'Account Name'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context)!.accountName),
                 ),
                 TextField(
                   controller: limitCtrl,
-                  decoration: const InputDecoration(labelText: 'Credit Limit'),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context)!.creditLimit),
                   keyboardType: TextInputType.number,
                 ),
                 if (selectedType == 'Customer' && areas != null && areas.isNotEmpty)
                   DropdownButtonFormField<String>(
                     value: selectedAreaId,
-                    hint: const Text('Select Area (Optional)'),
+                    hint: Text(AppLocalizations.of(context)!.selectArea),
                     items: areas.map((a) => DropdownMenuItem(
                       value: a.areaId,
                       child: Text(a.areaName),
@@ -69,17 +70,17 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
               ],
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+              TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context)!.cancel)),
               ElevatedButton(
                 onPressed: () async {
                   if (nameCtrl.text.isEmpty) {
-                    ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Name is required')));
+                    ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                     return;
                   }
                   
                   final limit = double.tryParse(limitCtrl.text);
                   if (limit == null) {
-                    ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Invalid credit limit')));
+                    ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                     return;
                   }
 
@@ -99,11 +100,11 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
                   } catch (e) {
                     debugPrint('Error inserting account: $e');
                     if (ctx.mounted) {
-                      ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('Failed to save account: $e')));
+                      ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('${AppLocalizations.of(context)!.error}: $e')));
                     }
                   }
                 },
-                child: const Text('Save'),
+                child: Text(AppLocalizations.of(context)!.save),
               ),
             ],
           );
@@ -138,7 +139,7 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
               Row(
                 children: [
                   SegmentedButton<String>(
-                    segments: const [
+                    segments: [
                       ButtonSegment(value: 'Customer', label: Text('Customers')),
                       ButtonSegment(value: 'Supplier', label: Text('Suppliers')),
                     ],
@@ -153,7 +154,7 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
                     const SizedBox(width: 16),
                     ElevatedButton.icon(
                       icon: const Icon(Icons.add),
-                      label: Text('Add $selectedType'),
+                      label: Text(selectedType == 'Customer' ? AppLocalizations.of(context)!.addCustomer : AppLocalizations.of(context)!.addSupplier),
                       onPressed: () {
                         final areas = areasAsync.value;
                         _showAddAccountDialog(selectedType, areas);
@@ -171,7 +172,7 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
               data: (accounts) {
                 if (accounts.isEmpty) {
                   return Center(
-                    child: Text('No $selectedType accounts found.'),
+                    child: Text(AppLocalizations.of(context)!.noAccountsFound),
                   );
                 }
                 return ListView.builder(
@@ -206,7 +207,7 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
                           onPressed: () {
                             // Structural mock for viewing details
                           },
-                          child: const Text('View Ledger'),
+                          child: Text(AppLocalizations.of(context)!.viewLedger),
                         ),
                       ),
                     );
@@ -214,7 +215,7 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (e, st) => Center(child: Text('Error: $e')),
+              error: (e, st) => Center(child: Text('${AppLocalizations.of(context)!.error}: $e')),
             ),
           ),
         ],

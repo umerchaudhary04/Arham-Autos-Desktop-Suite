@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/db/database.dart';
 import '../../core/security/auth_provider.dart';
@@ -27,17 +28,17 @@ class _HrScreenState extends ConsumerState<HrScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Add Employee'),
+        title: Text(AppLocalizations.of(context)!.addEmployee),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: nameCtrl,
-              decoration: const InputDecoration(labelText: 'Full Name'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context)!.fullName),
             ),
             TextField(
               controller: titleCtrl,
-              decoration: const InputDecoration(labelText: 'Job Title'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context)!.jobTitle),
             ),
             TextField(
               controller: salaryCtrl,
@@ -47,16 +48,16 @@ class _HrScreenState extends ConsumerState<HrScreen> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context)!.cancel)),
           ElevatedButton(
             onPressed: () async {
               if (nameCtrl.text.isEmpty) {
-                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Name is required')));
+                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                 return;
               }
               final salary = double.tryParse(salaryCtrl.text);
               if (salaryCtrl.text.isNotEmpty && salary == null) {
-                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Invalid salary format')));
+                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                 return;
               }
 
@@ -73,11 +74,11 @@ class _HrScreenState extends ConsumerState<HrScreen> {
               } catch (e) {
                 debugPrint('Error inserting employee: $e');
                 if (ctx.mounted) {
-                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('Failed to save employee: $e')));
+                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('${AppLocalizations.of(context)!.error}: $e')));
                 }
               }
             },
-            child: const Text('Save'),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),
@@ -99,7 +100,7 @@ class _HrScreenState extends ConsumerState<HrScreen> {
               Text('Employees', style: Theme.of(context).textTheme.headlineMedium),
               ElevatedButton.icon(
                 icon: const Icon(Icons.add),
-                label: const Text('Add Employee'),
+                label: Text(AppLocalizations.of(context)!.addEmployee),
                 onPressed: _showAddEmployeeDialog,
               ),
             ],
@@ -110,7 +111,7 @@ class _HrScreenState extends ConsumerState<HrScreen> {
               data: (emps) {
                 if (emps.isEmpty) return const Center(child: Text('No employees found.'));
                 return DataTable(
-                  columns: const [
+                  columns: [
                     DataColumn(label: Text('Name')),
                     DataColumn(label: Text('Job Title')),
                     DataColumn(label: Text('Salary')),
@@ -123,7 +124,7 @@ class _HrScreenState extends ConsumerState<HrScreen> {
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (e, st) => Center(child: Text('Error: $e')),
+              error: (e, st) => Center(child: Text('${AppLocalizations.of(context)!.error}: $e')),
             ),
           ),
         ],

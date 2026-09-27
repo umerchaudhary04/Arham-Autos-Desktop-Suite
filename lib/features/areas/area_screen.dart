@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/db/database.dart';
 import '../../core/security/auth_provider.dart';
@@ -27,20 +28,20 @@ class _AreaScreenState extends ConsumerState<AreaScreen> {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          title: const Text('Add New Area'),
+          title: Text(AppLocalizations.of(context)!.addArea),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: 'Area Name')),
-              TextField(controller: cityCtrl, decoration: const InputDecoration(labelText: 'City')),
+              TextField(controller: nameCtrl, decoration: InputDecoration(labelText: AppLocalizations.of(context)!.areaName)),
+              TextField(controller: cityCtrl, decoration: InputDecoration(labelText: AppLocalizations.of(context)!.city)),
             ],
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+            TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context)!.cancel)),
             ElevatedButton(
               onPressed: () async {
                 if (nameCtrl.text.isEmpty) {
-                  ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text('Area Name is required')));
+                  ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                   return;
                 }
                 
@@ -56,11 +57,11 @@ class _AreaScreenState extends ConsumerState<AreaScreen> {
                 } catch (e) {
                   debugPrint('Error inserting area: $e');
                   if (ctx.mounted) {
-                    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('Failed to save area: $e')));
+                    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text('${AppLocalizations.of(context)!.error}: $e')));
                   }
                 }
               },
-              child: const Text('Save Area'),
+              child: Text(AppLocalizations.of(context)!.saveArea),
             ),
           ],
         );
@@ -80,7 +81,7 @@ class _AreaScreenState extends ConsumerState<AreaScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Area Management', style: Theme.of(context).textTheme.headlineMedium),
+              Text(AppLocalizations.of(context)!.areaManagement, style: Theme.of(context).textTheme.headlineMedium),
               ElevatedButton.icon(
                 icon: const Icon(Icons.map),
                 label: const Text('Add Area'),
@@ -108,7 +109,7 @@ class _AreaScreenState extends ConsumerState<AreaScreen> {
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (e, st) => Center(child: Text('Error: $e')),
+              error: (e, st) => Center(child: Text('${AppLocalizations.of(context)!.error}: $e')),
             ),
           ),
         ],

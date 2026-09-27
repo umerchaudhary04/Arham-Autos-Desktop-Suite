@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/localization/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import '../../core/db/database.dart';
@@ -152,7 +153,7 @@ class _GrnScreenState extends ConsumerState<GrnScreen> {
               Text('Line Items', style: Theme.of(context).textTheme.titleLarge),
               ElevatedButton.icon(
                 icon: const Icon(Icons.add),
-                label: const Text('Add Item'),
+                label: Text(AppLocalizations.of(context)!.addItem),
                 onPressed: _addLineItem,
               ),
             ],
