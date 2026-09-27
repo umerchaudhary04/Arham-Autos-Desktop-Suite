@@ -6,6 +6,7 @@ part of 'reports_dao.dart';
 mixin _$ReportsDaoMixin on DatabaseAccessor<AppDatabase> {
   $SalesInvoicesTable get salesInvoices => attachedDatabase.salesInvoices;
   $InvoiceItemsTable get invoiceItems => attachedDatabase.invoiceItems;
+  $AutoPartsTable get autoParts => attachedDatabase.autoParts;
   ReportsDaoManager get managers => ReportsDaoManager(this);
 }
 
@@ -16,4 +17,6 @@ class ReportsDaoManager {
       $$SalesInvoicesTableTableManager(_db.attachedDatabase, _db.salesInvoices);
   $$InvoiceItemsTableTableManager get invoiceItems =>
       $$InvoiceItemsTableTableManager(_db.attachedDatabase, _db.invoiceItems);
+  $$AutoPartsTableTableManager get autoParts =>
+      $$AutoPartsTableTableManager(_db.attachedDatabase, _db.autoParts);
 }

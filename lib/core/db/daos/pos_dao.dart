@@ -115,6 +115,7 @@ class PosDao extends DatabaseAccessor<AppDatabase> with _$PosDaoMixin {
 }
 
 class CartItem {
+  final String? partName;
   final String partId;
   final int quantity;
   final double unitPrice;
@@ -123,5 +124,6 @@ class CartItem {
     required this.partId,
     required this.quantity,
     required this.unitPrice,
+    this.partName,
   });
 }

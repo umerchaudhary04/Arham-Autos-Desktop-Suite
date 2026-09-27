@@ -45,7 +45,7 @@ class PosCartNotifier extends Notifier<PosCartState> {
     state = state.copyWith(customerId: customerId);
   }
 
-  void addItem(String partId, int quantity, double unitPrice) {
+  void addItem(String partId, int quantity, double unitPrice, {String? partName}) {
     // If part already in cart, update quantity
     final existingIndex = state.items.indexWhere((i) => i.partId == partId);
     if (existingIndex >= 0) {
@@ -53,6 +53,7 @@ class PosCartNotifier extends Notifier<PosCartState> {
       final newItems = List<CartItem>.from(state.items);
       newItems[existingIndex] = CartItem(
         partId: partId,
+        partName: partName ?? existingItem.partName,
         quantity: existingItem.quantity + quantity,
         unitPrice: existingItem
             .unitPrice, // Keep existing or update? Let's assume keep.
@@ -62,7 +63,7 @@ class PosCartNotifier extends Notifier<PosCartState> {
       state = state.copyWith(
         items: [
           ...state.items,
-          CartItem(partId: partId, quantity: quantity, unitPrice: unitPrice),
+          CartItem(partId: partId, quantity: quantity, unitPrice: unitPrice, partName: partName),
         ],
       );
     }

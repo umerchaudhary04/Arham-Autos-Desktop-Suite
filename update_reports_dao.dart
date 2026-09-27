@@ -1,8 +1,17 @@
-import 'package:drift/drift.dart';
-import '../database.dart';
+import 'dart:io';
 
-part 'reports_dao.g.dart';
-
+void main() {
+  final file = File('lib/core/db/daos/reports_dao.dart');
+  var content = file.readAsStringSync();
+  
+  if (!content.contains('AutoParts')) {
+    content = content.replaceFirst(
+      '@DriftAccessor(tables: [SalesInvoices, InvoiceItems])',
+      '@DriftAccessor(tables: [SalesInvoices, InvoiceItems, AutoParts])'
+    );
+  }
+  
+  final additions = """
 class RecentSaleDto {
   final String partName;
   final int quantity;
@@ -18,52 +27,13 @@ class DailySalesDto {
   
   DailySalesDto({required this.date, required this.sales});
 }
+""";
 
-
-
-@DriftAccessor(tables: [SalesInvoices, InvoiceItems, AutoParts])
-class ReportsDao extends DatabaseAccessor<AppDatabase> with _$ReportsDaoMixin {
-  ReportsDao(AppDatabase db) : super(db);
-
-  /// Get today's total sales
-  Future<double> getTodaySales() async {
-    final now = DateTime.now();
-    final startOfDay = DateTime(now.year, now.month, now.day);
-
-    final query = select(salesInvoices)
-      ..where((i) => i.createdAt.isBiggerOrEqualValue(startOfDay));
-
-    final invoices = await query.get();
-    return invoices.fold<double>(0.0, (sum, inv) => sum + inv.finalAmount);
+  if (!content.contains('RecentSaleDto')) {
+    content = additions + "\n" + content;
   }
-
-  /// Get today's profit (Admin/Manager only, handled in UI)
-  Future<double> getTodayProfit() async {
-    final now = DateTime.now();
-    final startOfDay = DateTime(now.year, now.month, now.day);
-
-    // Simplistic profit calculation: finalAmount - (sum of unitCogs * qty)
-    final invoices = await (select(
-      salesInvoices,
-    )..where((i) => i.createdAt.isBiggerOrEqualValue(startOfDay))).get();
-
-    double totalProfit = 0.0;
-
-    for (var inv in invoices) {
-      final items = await (select(
-        invoiceItems,
-      )..where((item) => item.invoiceId.equals(inv.invoiceId))).get();
-      double cost = items.fold(
-        0.0,
-        (sum, item) => sum + (item.unitCogs * item.quantity),
-      );
-      // Adjusting for invoice level discount isn't exact here, but sufficient for structural placeholder
-      totalProfit += (inv.finalAmount - cost);
-    }
-
-    return totalProfit;
-  }
-
+  
+  final methodAdditions = """
   Future<List<RecentSaleDto>> getRecentSales() async {
     final query = select(invoiceItems).join([
       innerJoin(salesInvoices, salesInvoices.invoiceId.equalsExp(invoiceItems.invoiceId)),
@@ -97,12 +67,12 @@ class ReportsDao extends DatabaseAccessor<AppDatabase> with _$ReportsDaoMixin {
     Map<String, double> salesByDay = {};
     for (int i = 0; i < 7; i++) {
       final d = startOf7DaysAgo.add(Duration(days: i));
-      salesByDay["${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}"] = 0.0;
+      salesByDay["\${d.year}-\${d.month.toString().padLeft(2, '0')}-\${d.day.toString().padLeft(2, '0')}"] = 0.0;
     }
     
     for (var inv in invoices) {
       final d = inv.createdAt;
-      final key = "${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}";
+      final key = "\${d.year}-\${d.month.toString().padLeft(2, '0')}-\${d.day.toString().padLeft(2, '0')}";
       if (salesByDay.containsKey(key)) {
         salesByDay[key] = (salesByDay[key] ?? 0.0) + inv.finalAmount;
       }
@@ -110,5 +80,14 @@ class ReportsDao extends DatabaseAccessor<AppDatabase> with _$ReportsDaoMixin {
     
     return salesByDay.entries.map((e) => DailySalesDto(date: DateTime.parse(e.key), sales: e.value)).toList();
   }
+""";
 
+  if (!content.contains('getRecentSales')) {
+    content = content.replaceFirst(
+      'return totalProfit;\n  }\n}',
+      'return totalProfit;\n  }\n\n' + methodAdditions + '\n}'
+    );
+  }
+  
+  file.writeAsStringSync(content);
 }
