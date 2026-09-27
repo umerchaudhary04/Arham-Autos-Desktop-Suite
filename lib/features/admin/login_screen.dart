@@ -42,7 +42,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       setState(() => _pin = '');
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Invalid PIN')));
+      ).showSnackBar(SnackBar(content: Text('Invalid PIN')));
     }
   }
 
@@ -56,7 +56,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     } else {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Invalid Credentials')));
+      ).showSnackBar(SnackBar(content: Text('Invalid Credentials')));
     }
   }
 

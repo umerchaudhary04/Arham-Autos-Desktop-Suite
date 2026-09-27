@@ -41,7 +41,7 @@ class _AreaScreenState extends ConsumerState<AreaScreen> {
             ElevatedButton(
               onPressed: () async {
                 if (nameCtrl.text.isEmpty) {
-                  ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
+                  ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                   return;
                 }
                 

@@ -86,7 +86,7 @@ class _CustomerReturnTabState extends ConsumerState<CustomerReturnTab> {
       if (mounted)
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('Invoice not found')));
+        ).showSnackBar(SnackBar(content: Text('Invoice not found')));
     }
   }
 
@@ -111,7 +111,7 @@ class _CustomerReturnTabState extends ConsumerState<CustomerReturnTab> {
 
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Return claim submitted for approval')),
+        SnackBar(content: Text('Return claim submitted for approval')),
       );
       setState(() {
         _invoice = null;

@@ -51,7 +51,7 @@ class _GlScreenState extends ConsumerState<GlScreen> {
           ElevatedButton(
             onPressed: () async {
               if (nameCtrl.text.isEmpty) {
-                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
+                ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                 return;
               }
               final db = ref.read(databaseProvider)!;
@@ -82,7 +82,7 @@ class _GlScreenState extends ConsumerState<GlScreen> {
     if (db == null) return;
     final accounts = await db.select(db.chartOfAccounts).get();
     if (accounts.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Add an account first')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Add an account first')));
       return;
     }
 
@@ -122,7 +122,7 @@ class _GlScreenState extends ConsumerState<GlScreen> {
             onPressed: () async {
               final amt = double.tryParse(amountCtrl.text);
               if (amt == null) {
-                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
+                ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                 return;
               }
               

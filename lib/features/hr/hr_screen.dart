@@ -52,12 +52,12 @@ class _HrScreenState extends ConsumerState<HrScreen> {
           ElevatedButton(
             onPressed: () async {
               if (nameCtrl.text.isEmpty) {
-                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
+                ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                 return;
               }
               final salary = double.tryParse(salaryCtrl.text);
               if (salaryCtrl.text.isNotEmpty && salary == null) {
-                ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
+                ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                 return;
               }
 

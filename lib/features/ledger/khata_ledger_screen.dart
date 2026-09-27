@@ -74,13 +74,13 @@ class _KhataLedgerScreenState extends ConsumerState<KhataLedgerScreen> {
               ElevatedButton(
                 onPressed: () async {
                   if (nameCtrl.text.isEmpty) {
-                    ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
+                    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                     return;
                   }
                   
                   final limit = double.tryParse(limitCtrl.text);
                   if (limit == null) {
-                    ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(AppLocalizations.of(context)!.error)));
+                    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.error)));
                     return;
                   }
 

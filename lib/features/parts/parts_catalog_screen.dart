@@ -82,8 +82,8 @@ class _PartsCatalogScreenState extends ConsumerState<PartsCatalogScreen> {
               ),
               TextField(
                 controller: reorderCtrl,
-                decoration: const InputDecoration(
-                  labelText: AppLocalizations.of(context)!.minReorderLevel,
+                decoration: InputDecoration(
+labelText: AppLocalizations.of(context)!.minReorderLevel,
                 ),
                 keyboardType: TextInputType.number,
               ),
@@ -157,8 +157,8 @@ class _PartsCatalogScreenState extends ConsumerState<PartsCatalogScreen> {
           ),
           const SizedBox(height: 16),
           TextField(
-            decoration: const InputDecoration(
-              labelText: AppLocalizations.of(context)!.searchParts,
+            decoration: InputDecoration(
+labelText: AppLocalizations.of(context)!.searchParts,
               border: OutlineInputBorder(),
               prefixIcon: Icon(Icons.search),
             ),
@@ -190,7 +190,7 @@ class _PartsCatalogScreenState extends ConsumerState<PartsCatalogScreen> {
                                 if (!context.mounted) return;
                                 if (auth)
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
+                                    SnackBar(
                                       content: Text(
                                         'Authorized. (Structural Mock)',
                                       ),

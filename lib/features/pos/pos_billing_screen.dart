@@ -88,13 +88,13 @@ class _PosBillingScreenState extends ConsumerState<PosBillingScreen> {
     if (success) {
       if (mounted)
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Checkout Complete. Printing...')),
+          SnackBar(content: Text('Checkout Complete. Printing...')),
         );
     } else {
       if (mounted)
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('Checkout Failed.')));
+        ).showSnackBar(SnackBar(content: Text('Checkout Failed.')));
     }
     _searchFocusNode.requestFocus();
   }

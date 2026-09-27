@@ -24,7 +24,7 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen> {
     final user = ref.read(authProvider).user;
     if (user == null || user.role != 'Admin') {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Export restricted to Admin only.')),
+        SnackBar(content: Text('Export restricted to Admin only.')),
       );
       return;
     }

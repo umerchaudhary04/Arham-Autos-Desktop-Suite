@@ -52,14 +52,14 @@ class _GrnScreenState extends ConsumerState<GrnScreen> {
 
   Future<void> _commitGrn() async {
     if (_selectedSupplierId == null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Select a supplier first')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Select a supplier first')));
       return;
     }
     
     // Validate
     for (var item in _lineItems) {
       if (item['partId'] == null || item['qty'] <= 0 || item['cost'] <= 0) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Invalid line item data')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid line item data')));
         return;
       }
     }
@@ -102,7 +102,7 @@ class _GrnScreenState extends ConsumerState<GrnScreen> {
       });
       
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('GRN committed successfully')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('GRN committed successfully')));
       }
     } catch (e) {
       if (mounted) {
